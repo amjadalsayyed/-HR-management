@@ -7,6 +7,9 @@ html {
 body {
   margin: 0;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 a {
@@ -36,11 +39,47 @@ a {
 .content {
   padding: 0 10%;
   padding-top: 120px;
-  height: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
-.jscontent {
+.formContanier {
   padding: 5% 5%;
   box-shadow: 2px 2px 5px 5px #5708d1;
+  background-color: #5708d1;
+  color: white;
+}
+.input {
+  display: flex;
+  justify-content: space-evenly;
+  font-weight: bold;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  row-gap: 30px;
+  padding-bottom: 2%;
+}
+
+.card {
+  padding: 1% 1%;
+  box-shadow: 2px 2px 5px 5px #5708d1;
+  background-color: rgb(27, 87, 45);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.cardimg {
+  border-radius: 50%;
+  background-color: white;
+}
+.imgContaneir {
+  background-color: white;
+  padding: 2%;
 }
 
 .footer {
@@ -48,7 +87,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 20%;
+
   color: rgb(241, 241, 241);
   font-size: 24px;
   font-weight: bolder;
