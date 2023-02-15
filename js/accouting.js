@@ -17,7 +17,7 @@ function sumofsalery(arr) {
 }
 
 function avgsalery(arr) {
-  return sumofsalery(arr) !== 0 ? sumofsalery(arr) / arr.length : 0;
+  return Math.floor(sumofsalery(arr) !== 0 ? sumofsalery(arr) / arr.length : 0);
 }
 
 function render() {
