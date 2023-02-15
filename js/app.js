@@ -1,5 +1,5 @@
 "use strict";
-
+let employeeArr = [];
 function Employee(imageUrl, fullName, department, level) {
   this.id = 0;
   this.fullName = fullName;
@@ -8,6 +8,7 @@ function Employee(imageUrl, fullName, department, level) {
   this.imageUrl = imageUrl;
   this.salery = 0;
   this.netSalery = 0;
+  employeeArr.push(this);
 }
 
 Employee.prototype.calSalery = function () {
@@ -24,7 +25,7 @@ Employee.prototype.calSalery = function () {
     default:
       break;
   }
-  this.netSalery = this.salery - (this.salery / 100) * 7.5;
+  this.netSalery = Math.floor(this.salery - (this.salery / 100) * 7.5);
   return this.netSalery;
 };
 
@@ -41,7 +42,6 @@ employeeForm.addEventListener("submit", addNewEmployeeHandler);
 
 function addNewEmployeeHandler(e) {
   e.preventDefault();
-  console.log(e);
   let imageUrl = e.target.imgUrl.value;
   let employeeName = e.target.name.value;
   let department = e.target.department.value;
@@ -49,39 +49,54 @@ function addNewEmployeeHandler(e) {
   let newEmployee = new Employee(imageUrl, employeeName, department, level);
   newEmployee.idGen();
   newEmployee.calSalery();
-  newEmployee.render(); // call render
+
+  let jsonArr = JSON.stringify(employeeArr);
+  localStorage.setItem("employees", jsonArr);
+
+  render();
 }
 
-Employee.prototype.render = function () {
+function render() {
   const container = document.getElementById("content");
+  container.innerHTML = "";
 
-  const card = document.createElement("div");
-  card.classList.add("card");
-  container.appendChild(card);
+  for (let i = 0; i < employeeArr.length; i++) {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    container.appendChild(card);
 
-  const cardImg = document.createElement("img");
-  const cardImgContanier = document.createElement("div");
-  cardImgContanier.classList.add("imgContaneir");
-  card.appendChild(cardImgContanier);
-  cardImgContanier.appendChild(cardImg);
-  cardImg.classList.add("cardimg");
-  cardImg.setAttribute("src", this.imageUrl);
-  cardImg.width = "150";
-  cardImg.height = "150";
+    const cardImg = document.createElement("img");
+    const cardImgContanier = document.createElement("div");
+    cardImgContanier.classList.add("imgContaneir");
+    card.appendChild(cardImgContanier);
+    cardImgContanier.appendChild(cardImg);
+    cardImg.classList.add("cardimg");
+    cardImg.setAttribute("src", employeeArr[i].imageUrl);
+    cardImg.width = "150";
+    cardImg.height = "150";
 
-  const employeeName = document.createElement("h4");
-  card.appendChild(employeeName);
-  employeeName.textContent = `Name: ${this.fullName} - ID: ${this.id}`;
+    const employeeName = document.createElement("h4");
+    card.appendChild(employeeName);
+    employeeName.textContent = `Name: ${employeeArr[i].fullName} - ID: ${employeeArr[i].id}`;
 
-  const departmentAndLevel = document.createElement("p");
-  card.appendChild(departmentAndLevel);
-  departmentAndLevel.textContent = `Deperatment: ${this.department} - Level:${this.level}`;
+    const departmentAndLevel = document.createElement("p");
+    card.appendChild(departmentAndLevel);
+    departmentAndLevel.textContent = `Deperatment: ${employeeArr[i].department} - Level:${employeeArr[i].level}`;
 
-  const salery = document.createElement("p");
-  card.appendChild(salery);
-  salery.textContent = `Salery: ${this.salery}$ - Net Salery: ${this.netSalery}$`;
-};
+    const salery = document.createElement("p");
+    card.appendChild(salery);
+    salery.textContent = `Salery: ${employeeArr[i].salery}$ - Net Salery: ${employeeArr[i].netSalery}$`;
+  }
+}
 
+function getempolyees() {
+  let jsonArr = localStorage.getItem("employees");
+  if (jsonArr !== null) {
+    employeeArr = JSON.parse(jsonArr);
+  }
+}
+getempolyees();
+render();
 // Employee.prototype.render = function () {
 //   document.write(`${this.fullName} salery equls ${this.calSalery()} <br/> `);
 // };

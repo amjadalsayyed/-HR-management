@@ -58,13 +58,14 @@ a {
 .cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   row-gap: 30px;
   padding-bottom: 2%;
 }
 
 .card {
-  padding: 1% 1%;
+  padding: 1%;
+  width: 29%;
   box-shadow: 2px 2px 5px 5px #5708d1;
   background-color: rgb(27, 87, 45);
   color: white;
@@ -102,3 +103,31 @@ a {
 .copyright {
   margin-left: 5%;
 }
+
+/* ******************************* accounting page **************************************** */
+
+.tableContanier {
+  padding: 5% 5%;
+  box-shadow: 2px 2px 5px 5px rgb(27, 87, 45);
+  background-color: #5708d1;
+  color: white;
+}
+
+table th {
+  font-size: 20px;
+  /* background-color: rgb(27, 87, 45); */
+}
+
+table td {
+  font-size: 18px;
+  text-align: center;
+  /* background-color: rgb(27, 87, 45); */
+}
+
+.tableHeader {
+  background-color: rgb(27, 87, 45);
+}
+
+/* .tablefooter {
+  border-color: white;
+} */
